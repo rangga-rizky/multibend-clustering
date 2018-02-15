@@ -26,7 +26,13 @@ for ($i=1; $i < 7; $i++) {
 }
 
 $single=new Cluster($dataset);
-$single->singleLinkage($_GET["k"]);
+if(isset($_GET["k"])){
+	$k = $_GET["k"];
+}
+else{
+	$k=3;
+}
+$single->singleLinkage($k);
 $clusters=$single->getCluster();
 
 $result = [];
@@ -86,15 +92,19 @@ imagejpeg($img,"result.jpg");
 <head>
 	<title>Landsat 7</title>
 </head>
-<body style="background: #FDFDFD">
-	<div align="center">
+<body style="background-color: #E0F7FA">
+	<div align="center" style="margin-top: 50px;">
+		<h1>MultiBend Clustering pada Landsat 7</h1>
 	<?php for ($i=1; $i < 7; $i++) { ?>
 		<img src="satelit/gb<?php echo $i?>.GIF" widht="150px" height="150px">
 	<?php } ?>
 	</div>
 	<br>
 	<div align="center">
-		<img src="result.jpg" widht="200px" height="200px">
+		<h3>Hasil cluster = 3,4 dan 5</h3>
+		<img src="result3.jpg" widht="200px" height="200px">
+		<img src="result4.jpg" widht="200px" height="200px">
+		<img src="result5.jpg" widht="200px" height="200px">
 	</div>
 
 </body>
